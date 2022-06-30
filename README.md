@@ -1,5 +1,5 @@
 # Client-server-calendar-with-Java-Swing
-Projekt kalendarza wykonany na zaliczenie przedmiotu na studiach. Chcę go dalej rozwijać - poprawić jakość kodu, wzbogacić o nowe technologie (np. Spring i połączenie z bazą danych)
+Projekt kalendarza wykonany na zaliczenie przedmiotu na studiach. Chcę go dalej rozwijać - poprawić jakość kodu, wzbogacić o nowe technologie (np. Spring i połączenie z bazą danych). Projekt zawiera dokumentację JavaDoc
 
 Uruchamiając program sprawdzane jest czy jest uruchomiony serwer oraz zależnie od tego czy zapisaliśmy nazwę użytkownika czy nie wyświetlone jest okno logowania lub od razu główne okno programu. Podczas logowania podajemy dowolny ciąg znaków i zależnie od tego czy taki był już podany pobierane są wydarzenia tego użytkownika lub tworzony jest nowy z podaną nazwą.
 
