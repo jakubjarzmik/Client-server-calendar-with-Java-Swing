@@ -42,15 +42,16 @@ class Session extends Thread {
             out = new ObjectOutputStream(socket.getOutputStream());
             nick =(String) in.readObject();
             System.out.println("Nick: " + nick);
-//            for(UnusualHolidayAndNameDay u : Server.unusualHolidayAndNameDays)
-//                if(u.getLocalDate().getDayOfMonth() == LocalDate.now().getDayOfMonth() && u.getLocalDate().getMonthValue() == LocalDate.now().getMonthValue()) {
-//                    out.writeObject(u);
-//                    break;
-//                }
-            Document unusualHolidayDocument = Jsoup.connect("https://www.kalbi.pl/kalendarz-swiat-nietypowych").get();
-            Elements unusualHolidayElements = unusualHolidayDocument.getElementsByClass("day");
-            String holidayName="Dzisiaj nie obchodzimy żadnego święta";
-            String nameDay="Dzisiaj nie obchodzimy imienin";
+
+            Document unusualHolidayDocument = Jsoup.connect("https://bimkal.pl/kalendarz-swiat").get();
+            Elements unusualHolidayElements = unusualHolidayDocument.getElementsByClass("nietypowe");
+            String holidayName = unusualHolidayElements.get(0).text().split(",")[0];
+
+            Document nameDayDocument = Jsoup.connect("https://www.google.com/search?q=imieniny+dzisiaj&oq=imie&aqs=chrome.0.69i59j69i57j0i512l3j69i60l3.3538j0j4&sourceid=chrome&ie=UTF-8").get();
+            Elements nameDayElements = nameDayDocument.getElementsByClass("hgKElc");
+            String nameDay = nameDayElements.get(0).text().split(":")[1].split(" i ")[0];
+
+
             UnusualHolidayAndNameDay unusualHolidayAndNameDay = new UnusualHolidayAndNameDay(LocalDate.now(), holidayName, nameDay);
             out.writeObject(unusualHolidayAndNameDay);
             getMyEvents();
