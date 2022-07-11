@@ -2,6 +2,9 @@ package Server;
 
 import StorageClasses.Event;
 import StorageClasses.UnusualHolidayAndNameDay;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import java.io.*;
 import java.net.Socket;
@@ -39,11 +42,17 @@ class Session extends Thread {
             out = new ObjectOutputStream(socket.getOutputStream());
             nick =(String) in.readObject();
             System.out.println("Nick: " + nick);
-            for(UnusualHolidayAndNameDay u : Server.unusualHolidayAndNameDays)
-                if(u.getLocalDate().getDayOfMonth() == LocalDate.now().getDayOfMonth() && u.getLocalDate().getMonthValue() == LocalDate.now().getMonthValue()) {
-                    out.writeObject(u);
-                    break;
-                }
+//            for(UnusualHolidayAndNameDay u : Server.unusualHolidayAndNameDays)
+//                if(u.getLocalDate().getDayOfMonth() == LocalDate.now().getDayOfMonth() && u.getLocalDate().getMonthValue() == LocalDate.now().getMonthValue()) {
+//                    out.writeObject(u);
+//                    break;
+//                }
+            Document unusualHolidayDocument = Jsoup.connect("https://www.kalbi.pl/kalendarz-swiat-nietypowych").get();
+            Elements unusualHolidayElements = unusualHolidayDocument.getElementsByClass("day");
+            String holidayName="Dzisiaj nie obchodzimy żadnego święta";
+            String nameDay="Dzisiaj nie obchodzimy imienin";
+            UnusualHolidayAndNameDay unusualHolidayAndNameDay = new UnusualHolidayAndNameDay(LocalDate.now(), holidayName, nameDay);
+            out.writeObject(unusualHolidayAndNameDay);
             getMyEvents();
             out.writeObject(userEvents);
             out.writeObject(Server.defaultEvents);
