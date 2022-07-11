@@ -43,13 +43,18 @@ class Session extends Thread {
             nick =(String) in.readObject();
             System.out.println("Nick: " + nick);
 
-            Document unusualHolidayDocument = Jsoup.connect("https://bimkal.pl/kalendarz-swiat").get();
-            Elements unusualHolidayElements = unusualHolidayDocument.getElementsByClass("nietypowe");
-            String holidayName = unusualHolidayElements.get(0).text().split(",")[0];
+            String holidayName, nameDay;
+            try {
+                Document unusualHolidayDocument = Jsoup.connect("https://bimkal.pl/kalendarz-swiat").get();
+                Elements unusualHolidayElements = unusualHolidayDocument.getElementsByClass("nietypowe");
+                holidayName = unusualHolidayElements.get(0).text().split(",")[0];
+            }catch (IOException exception){ holidayName = "* błąd połączenia *";}
 
-            Document nameDayDocument = Jsoup.connect("https://www.google.com/search?q=imieniny+dzisiaj&oq=imie&aqs=chrome.0.69i59j69i57j0i512l3j69i60l3.3538j0j4&sourceid=chrome&ie=UTF-8").get();
-            Elements nameDayElements = nameDayDocument.getElementsByClass("hgKElc");
-            String nameDay = nameDayElements.get(0).text().split(":")[1].split(" i ")[0];
+            try {
+                Document nameDayDocument = Jsoup.connect("https://www.google.com/search?q=imieniny+dzisiaj&oq=imie&aqs=chrome.0.69i59j69i57j0i512l3j69i60l3.3538j0j4&sourceid=chrome&ie=UTF-8").get();
+                Elements nameDayElements = nameDayDocument.getElementsByClass("hgKElc");
+                nameDay = nameDayElements.get(0).text().split(":")[1].split(" i ")[0];
+            }catch (IOException exception){nameDay = "* błąd połączenia *";}
 
 
             UnusualHolidayAndNameDay unusualHolidayAndNameDay = new UnusualHolidayAndNameDay(LocalDate.now(), holidayName, nameDay);
