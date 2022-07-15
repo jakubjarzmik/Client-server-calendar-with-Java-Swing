@@ -41,7 +41,7 @@ class Server {
      * Obsługuje łączących się klientów
      */
     void run() {
-        Socket socket = null;
+        Socket socket;
         try {
             while(true) {
                 /* Czekaj, aż klient się połączy */
@@ -91,7 +91,7 @@ class Server {
                 usersData.add(userData);
             }
         }
-        catch(EOFException e) { System.out.println("Koniec odczytu eventow uzytkownika na serwer"); }
+        catch(EOFException e) { System.out.println("Koniec odczytu eventów użytkownika na serwer"); }
         catch(IOException e) {
             e.printStackTrace();
         }
@@ -111,7 +111,7 @@ class Server {
                 defaultEvents.add(event);
             }
         }
-        catch(EOFException e) { System.out.println("Koniec odczytu domyslnych eventow na serwer"); }
+        catch(EOFException e) { System.out.println("Koniec odczytu domyślnych eventów na serwer"); }
         catch(IOException e) {
             e.printStackTrace();
         }
