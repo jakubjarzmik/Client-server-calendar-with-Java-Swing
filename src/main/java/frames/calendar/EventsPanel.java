@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.*;
 
-import frames.comparators.MyComparator;
 import storageclasses.AllDayEvent;
 import storageclasses.Event;
 
@@ -76,7 +75,7 @@ public class EventsPanel extends JPanel{
         ArrayList<Event> allEvents = new ArrayList<>(userEvents);
         allEvents.addAll(defaultEvents);
 
-        allEvents.sort(new MyComparator());
+        allEvents.sort((e1,e2) -> e1.eventStartTime().compareTo(e2.eventStartTime()));
         JPanel eventsListPanel = new JPanel(new FlowLayout());
         eventsListPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 
