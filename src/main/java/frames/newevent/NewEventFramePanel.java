@@ -1,6 +1,6 @@
-package Frames.NewEvent;
+package frames.newevent;
 
-import Frames.Calendar.CalendarFrame;
+import frames.calendar.CalendarFrame;
 
 import javax.swing.*;
 import java.awt.*;

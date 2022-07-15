@@ -1,7 +1,6 @@
-package Server;
+package server;
 
-import StorageClasses.AllDayEvent;
-import StorageClasses.UnusualHolidayAndNameDay;
+import storageclasses.AllDayEvent;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -28,7 +27,7 @@ class Server {
         try {
             usersData = new ArrayList<>();
             defaultEvents = new ArrayList<>();
-            //setDefaultEvents();
+            setDefaultEvents();
             getDefaultEvents();
             s = new ServerSocket(serverPort);
             System.out.println("Serwer uruchomiony");

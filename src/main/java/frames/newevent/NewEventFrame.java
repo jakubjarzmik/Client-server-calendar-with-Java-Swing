@@ -1,8 +1,8 @@
-package Frames.NewEvent;
+package frames.newevent;
 
-import Frames.Calendar.CalendarFrame;
-import StorageClasses.AllDayEvent;
-import StorageClasses.TemporaryEvent;
+import frames.calendar.CalendarFrame;
+import storageclasses.AllDayEvent;
+import storageclasses.TemporaryEvent;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

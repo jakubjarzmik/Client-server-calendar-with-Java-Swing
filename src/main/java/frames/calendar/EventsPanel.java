@@ -1,4 +1,4 @@
-package Frames.Calendar;
+package frames.calendar;
 
 import java.awt.*;
 import java.time.LocalDate;
@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.*;
 
-import Frames.Comparators.MyComparator;
-import StorageClasses.AllDayEvent;
-import StorageClasses.Event;
+import frames.comparators.MyComparator;
+import storageclasses.AllDayEvent;
+import storageclasses.Event;
 
 /**
  * Klasa służąca do wyświetlenia panelu z listą wydarzeń

@@ -1,7 +1,7 @@
-package Frames.Calendar;
+package frames.calendar;
 
-import Frames.Calendar.Threads.ClockThread;
-import Frames.Calendar.Threads.NameDayThread;
+import frames.calendar.threads.ClockThread;
+import frames.calendar.threads.NameDayThread;
 
 import javax.swing.*;
 import java.awt.*;

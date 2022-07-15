@@ -1,6 +1,6 @@
-package Server;
+package server;
 
-import StorageClasses.Event;
+import storageclasses.Event;
 
 import java.io.Serializable;
 import java.util.ArrayList;

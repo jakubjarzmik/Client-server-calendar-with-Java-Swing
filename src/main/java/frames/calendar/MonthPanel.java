@@ -1,4 +1,4 @@
-package Frames.Calendar;
+package frames.calendar;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

@@ -1,9 +1,9 @@
-package Frames.Calendar;
+package frames.calendar;
 
-import Frames.NewEvent.NewEventFrame;
-import StorageClasses.UnusualHolidayAndNameDay;
-import StorageClasses.AllDayEvent;
-import StorageClasses.Event;
+import frames.newevent.NewEventFrame;
+import storageclasses.UnusualHolidayAndNameDay;
+import storageclasses.AllDayEvent;
+import storageclasses.Event;
 
 import java.awt.*;
 import java.awt.event.*;

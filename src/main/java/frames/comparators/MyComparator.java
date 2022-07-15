@@ -1,6 +1,6 @@
-package Frames.Comparators;
+package frames.comparators;
 
-import StorageClasses.Event;
+import storageclasses.Event;
 
 import java.util.Comparator;
 

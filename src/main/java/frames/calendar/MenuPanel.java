@@ -1,4 +1,4 @@
-package Frames.Calendar;
+package frames.calendar;
 
 import javax.swing.*;
 import java.awt.*;

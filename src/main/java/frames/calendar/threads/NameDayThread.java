@@ -1,6 +1,6 @@
-package Frames.Calendar.Threads;
+package frames.calendar.threads;
 
-import Frames.Calendar.CalendarFrame;
+import frames.calendar.CalendarFrame;
 
 import javax.swing.*;
 

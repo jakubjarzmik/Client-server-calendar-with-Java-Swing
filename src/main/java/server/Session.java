@@ -1,7 +1,7 @@
-package Server;
+package server;
 
-import StorageClasses.Event;
-import StorageClasses.UnusualHolidayAndNameDay;
+import storageclasses.Event;
+import storageclasses.UnusualHolidayAndNameDay;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;

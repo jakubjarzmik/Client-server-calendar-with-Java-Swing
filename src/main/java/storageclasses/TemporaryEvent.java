@@ -1,4 +1,4 @@
-package StorageClasses;
+package storageclasses;
 
 import java.time.LocalDateTime;
 

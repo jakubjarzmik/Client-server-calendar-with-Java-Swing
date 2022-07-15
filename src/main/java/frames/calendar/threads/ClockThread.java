@@ -1,6 +1,6 @@
-package Frames.Calendar.Threads;
+package frames.calendar.threads;
 
-import Frames.Calendar.UpperPanel;
+import frames.calendar.UpperPanel;
 
 import javax.swing.*;
 
