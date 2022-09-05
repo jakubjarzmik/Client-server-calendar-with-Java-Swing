@@ -51,9 +51,9 @@ class Session extends Thread {
             }catch (IOException exception){ holidayName = "* błąd połączenia *";}
 
             try {
-                Document nameDayDocument = Jsoup.connect("https://www.google.com/search?q=imieniny+dzisiaj&oq=imie&aqs=chrome.0.69i59j69i57j0i512l3j69i60l3.3538j0j4&sourceid=chrome&ie=UTF-8").get();
-                Elements nameDayElements = nameDayDocument.getElementsByClass("hgKElc");
-                nameDay = nameDayElements.get(0).text().split(":")[1].split(" i ")[0];
+                Document nameDayDocument = Jsoup.connect("https://imienniczek.pl/dzis").get();
+                Elements nameDayElements = nameDayDocument.getElementsByClass("main_imi");
+                nameDay = nameDayElements.get(0).text().replace(" ", ", ");
             }catch (IOException exception){nameDay = "* błąd połączenia *";}
 
 
