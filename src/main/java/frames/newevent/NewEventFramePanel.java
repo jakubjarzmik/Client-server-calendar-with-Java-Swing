@@ -107,8 +107,8 @@ class NewEventFramePanel extends JPanel {
         startTimePanel.add(startTimeLabel);
         dayStartTime = new JComboBox<>(days);
         dayStartTime.setSelectedItem(days[calendarFrame.getActualSelectedDay()]);
-        monthStartTime = new JComboBox<>(CalendarFrame.monthNames);
-        monthStartTime.setSelectedItem(CalendarFrame.monthNames[calendarFrame.getActualSelectedMonth()]);
+        monthStartTime = new JComboBox<>(CalendarFrame.MONTH_NAMES);
+        monthStartTime.setSelectedItem(CalendarFrame.MONTH_NAMES[calendarFrame.getActualSelectedMonth()]);
         yearStartTime = new JComboBox<>(years);
         hourStartTime = new JComboBox<>(hours);
         minuteStartTime = new JComboBox<>(minutes);
@@ -138,8 +138,8 @@ class NewEventFramePanel extends JPanel {
         endTimePanel.add(endTimeLabel);
         dayEndTime = new JComboBox<>(days);
         dayEndTime.setSelectedItem(days[calendarFrame.getActualSelectedDay()]);
-        monthEndTime = new JComboBox<>(CalendarFrame.monthNames);
-        monthEndTime.setSelectedItem(CalendarFrame.monthNames[calendarFrame.getActualSelectedMonth()]);
+        monthEndTime = new JComboBox<>(CalendarFrame.MONTH_NAMES);
+        monthEndTime.setSelectedItem(CalendarFrame.MONTH_NAMES[calendarFrame.getActualSelectedMonth()]);
         yearEndTime = new JComboBox<>(years);
         hourEndTime = new JComboBox<>(hours);
         minuteEndTime = new JComboBox<>(minutes);

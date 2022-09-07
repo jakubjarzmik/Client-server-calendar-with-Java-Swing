@@ -42,7 +42,7 @@ public class UpperPanel extends JPanel{
         clockPanel.setBorder(BorderFactory.createLineBorder(CalendarFrame.NAVY_BLUE,2));
         clockPanel.setBackground(CalendarFrame.NAVY_BLUE);
         clockLabel.setForeground(Color.WHITE);
-        clockLabel.setFont(CalendarFrame.bigDefaultBoldFont);
+        clockLabel.setFont(CalendarFrame.BIG_DEFAULT_BOLD_FONT);
 
         clockPanel.add(clockLabel);
         ClockThread clockThread = new ClockThread(clockLabel);
@@ -61,7 +61,7 @@ public class UpperPanel extends JPanel{
         nameDayPanel.setBorder(BorderFactory.createLineBorder(CalendarFrame.NAVY_BLUE,2));
         nameDayPanel.setBackground(CalendarFrame.NAVY_BLUE);
         nameDayLabel.setForeground(Color.WHITE);
-        nameDayLabel.setFont(CalendarFrame.bigDefaultBoldFont);
+        nameDayLabel.setFont(CalendarFrame.BIG_DEFAULT_BOLD_FONT);
 
 
         nameDayPanel.add(nameDayLabel);

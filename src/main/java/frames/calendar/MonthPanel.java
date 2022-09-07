@@ -60,7 +60,7 @@ class MonthPanel extends JPanel {
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new FlowLayout());
         titlePanel.setBackground(CalendarFrame.NAVY_BLUE);
-        JLabel label = new JLabel(CalendarFrame.monthNames[month] + " " + year, SwingConstants.CENTER);
+        JLabel label = new JLabel(CalendarFrame.MONTH_NAMES[month] + " " + year, SwingConstants.CENTER);
 
         Action nextMonthAction = new AbstractAction("") {
                 @Override
@@ -100,7 +100,7 @@ class MonthPanel extends JPanel {
         nextMonthButton.setBorder(null);
 
         label.setForeground(Color.WHITE);
-        label.setFont(CalendarFrame.headerDefaultFont);
+        label.setFont(CalendarFrame.HEADER_DEFAULT_FONT);
         label.setPreferredSize(new Dimension(150,25));
 
         titlePanel.add(previousMonthButton);
@@ -142,7 +142,7 @@ class MonthPanel extends JPanel {
             else
                 dPanel.setBackground(new Color(0,23,48,100));
             JLabel dLabel = new JLabel(dayNames[i]);
-            dLabel.setFont(CalendarFrame.bigDefaultBoldFont);
+            dLabel.setFont(CalendarFrame.BIG_DEFAULT_BOLD_FONT);
             dLabel.setPreferredSize(new Dimension(34,20));
             dLabel.setVerticalAlignment(SwingConstants.CENTER);
             dLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -160,7 +160,7 @@ class MonthPanel extends JPanel {
             JButton dButton = new JButton();
             dayButtons[iterator.get(Calendar.DAY_OF_MONTH)-1] = dButton;
             dButton.setBorder(BorderFactory.createLineBorder(CalendarFrame.NAVY_BLUE));
-            dButton.setFont(CalendarFrame.bigDefaultFont);
+            dButton.setFont(CalendarFrame.BIG_DEFAULT_FONT);
 
             if ((lMonth == month) && (lYear == year)) {
                 int lDay = iterator.get(Calendar.DAY_OF_MONTH);

@@ -85,7 +85,7 @@ class MenuPanel extends JPanel {
     private void setButtonStyle(Component c, Color foreground, Color background){
         c.setForeground(foreground);
         c.setBackground(background);
-        c.setFont(CalendarFrame.bigDefaultBoldFont);
+        c.setFont(CalendarFrame.BIG_DEFAULT_BOLD_FONT);
         c.setPreferredSize(new Dimension(150,35));
     }
 

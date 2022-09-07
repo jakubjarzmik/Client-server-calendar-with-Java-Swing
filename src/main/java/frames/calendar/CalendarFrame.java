@@ -24,12 +24,12 @@ public class CalendarFrame extends JFrame implements ActionListener {
     public static final Color NAVY_BLUE = new Color(0,23,48);
     public static final Color LIGHT_BLUE = new Color(74,215,209);
     public static final Color LIGHT_RED = new Color(254,74,73);
-    public static final Font defaultFont = new Font("Open Sans", Font.PLAIN, 12);
-    public static final Font defaultBoldFont = new Font("Open Sans", Font.BOLD, 12);
-    public static final Font bigDefaultFont = new Font("Open Sans", Font.PLAIN, 14);
-    public static final Font bigDefaultBoldFont = new Font("Open Sans", Font.BOLD, 14);
-    public static final Font headerDefaultFont = new Font("Open Sans", Font.BOLD, 16);
-    public static final String[] monthNames = { "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"};
+    public static final Font DEFAULT_FONT = new Font("Open Sans", Font.PLAIN, 12);
+    public static final Font DEFAULT_BOLD_FONT = new Font("Open Sans", Font.BOLD, 12);
+    public static final Font BIG_DEFAULT_FONT = new Font("Open Sans", Font.PLAIN, 14);
+    public static final Font BIG_DEFAULT_BOLD_FONT = new Font("Open Sans", Font.BOLD, 14);
+    public static final Font HEADER_DEFAULT_FONT = new Font("Open Sans", Font.BOLD, 16);
+    public static final String[] MONTH_NAMES = { "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"};
     public static String[] unusualHolidayAndNameDay;
     private final WindowCloser windowCloser = new WindowCloser();
     protected MonthPanel monthPanel;
@@ -44,6 +44,7 @@ public class CalendarFrame extends JFrame implements ActionListener {
     private ObjectInputStream in;
     private String nick;
     private boolean changeNickname;
+
 
     /**
      * Konstruktor inicjalizuje komponenty, łączy się z serwerem i wyświetla okno logowania
@@ -72,6 +73,14 @@ public class CalendarFrame extends JFrame implements ActionListener {
         readNick();
         showLoginWindow();
         upperPanel = new UpperPanel();
+        init();
+    }
+
+    /**
+     * Służy do uruchomienia aplikacji
+     */
+    public static void main(String[] args) {
+        new CalendarFrame();
     }
 
     public EventsPanel getEventsPanel() {
@@ -303,14 +312,5 @@ public class CalendarFrame extends JFrame implements ActionListener {
             System.exit(0);
         }
     }
-
-    /**
-     * Służy do uruchomienia aplikacji
-     */
-    public static void main(String[] args) {
-        CalendarFrame calendarFrame = new CalendarFrame();
-        calendarFrame.init();
-    }
-
 }
 

@@ -60,7 +60,7 @@ public class EventsPanel extends JPanel{
         titlePanel.setLayout(new FlowLayout());
         titlePanel.setBackground(CalendarFrame.NAVY_BLUE);
         JLabel label = new JLabel("Twoje wydarzenia", SwingConstants.CENTER);
-        label.setFont(CalendarFrame.headerDefaultFont);
+        label.setFont(CalendarFrame.HEADER_DEFAULT_FONT);
         label.setForeground(Color.WHITE);
         label.setPreferredSize(new Dimension(150,25));
         titlePanel.add(label, BorderLayout.CENTER);
@@ -111,13 +111,13 @@ public class EventsPanel extends JPanel{
             JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
 
             eventNameLabel.setForeground(CalendarFrame.NAVY_BLUE);
-            eventNameLabel.setFont(CalendarFrame.bigDefaultBoldFont);
+            eventNameLabel.setFont(CalendarFrame.BIG_DEFAULT_BOLD_FONT);
             eventDurationLabel.setForeground(CalendarFrame.LIGHT_RED);
             eventOngoingMessageLabel.setForeground(CalendarFrame.LIGHT_RED);
-            eventOngoingMessageLabel.setFont(CalendarFrame.defaultBoldFont);
-            eventDurationLabel.setFont(CalendarFrame.defaultFont);
+            eventOngoingMessageLabel.setFont(CalendarFrame.DEFAULT_BOLD_FONT);
+            eventDurationLabel.setFont(CalendarFrame.DEFAULT_FONT);
             eventDescriptionLabel.setForeground(CalendarFrame.NAVY_BLUE);
-            eventDescriptionLabel.setFont(CalendarFrame.defaultFont);
+            eventDescriptionLabel.setFont(CalendarFrame.DEFAULT_FONT);
             separator.setForeground(CalendarFrame.LIGHT_BLUE);
             separator.setBackground(new Color(0,23,48,100));
 
@@ -155,7 +155,7 @@ public class EventsPanel extends JPanel{
 
         eventNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         eventNameLabel.setForeground(CalendarFrame.LIGHT_RED);
-        eventNameLabel.setFont(CalendarFrame.bigDefaultBoldFont);
+        eventNameLabel.setFont(CalendarFrame.BIG_DEFAULT_BOLD_FONT);
 
         JSeparator firstSeparator = new JSeparator(SwingConstants.HORIZONTAL);
         firstSeparator.setForeground(CalendarFrame.LIGHT_RED);
