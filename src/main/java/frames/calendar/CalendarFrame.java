@@ -1,6 +1,4 @@
 package frames.calendar;
-
-import frames.newevent.NewEventFrame;
 import storageclasses.UnusualHolidayAndNameDay;
 import storageclasses.AllDayEvent;
 import storageclasses.Event;
@@ -21,6 +19,7 @@ import javax.swing.*;
  * @version 0.1
  */
 public class CalendarFrame extends JFrame implements ActionListener {
+    private static CalendarFrame instance;
     public static final Color NAVY_BLUE = new Color(0,23,48);
     public static final Color LIGHT_BLUE = new Color(74,215,209);
     public static final Color LIGHT_RED = new Color(254,74,73);
@@ -37,19 +36,18 @@ public class CalendarFrame extends JFrame implements ActionListener {
     protected UpperPanel upperPanel;
     protected MenuPanel menuPanel;
     protected JPanel centerPanel;
-    private JButton calendarButton, eventListButton,changeUserButton;
-    private JButton[] dayButtons;
     protected int actualSelectedDay, actualSelectedMonth, actualSelectedYear;
     private ObjectOutputStream out;
     private ObjectInputStream in;
     private String nick;
     private boolean changeNickname;
+    private final ButtonsOperations buttonsOperations;
 
 
     /**
      * Konstruktor inicjalizuje komponenty, łączy się z serwerem i wyświetla okno logowania
      */
-    public CalendarFrame() {
+    private CalendarFrame() {
         super("Kalendarz"); // tytuł okienka
         unusualHolidayAndNameDay = new String[2];
         actualSelectedMonth = LocalDate.now().getMonthValue()-1;
@@ -59,6 +57,7 @@ public class CalendarFrame extends JFrame implements ActionListener {
         eventsPanel = new EventsPanel(this);
         menuPanel = new MenuPanel();
         centerPanel = new JPanel(new BorderLayout());
+        buttonsOperations = new ButtonsOperations();
         try{
             Socket socket = new Socket("127.0.0.1", 2020);
             out = new ObjectOutputStream(
@@ -75,12 +74,18 @@ public class CalendarFrame extends JFrame implements ActionListener {
         upperPanel = new UpperPanel();
         init();
     }
+    public static CalendarFrame getInstance(){
+        if(instance == null) {
+            instance = new CalendarFrame();
+        }
+        return instance;
+    }
 
     /**
      * Służy do uruchomienia aplikacji
      */
     public static void main(String[] args) {
-        new CalendarFrame();
+        CalendarFrame.getInstance();
     }
 
     public EventsPanel getEventsPanel() {
@@ -120,7 +125,7 @@ public class CalendarFrame extends JFrame implements ActionListener {
         centerPanel.add(monthPanel);
         add(menuPanel,BorderLayout.WEST);
         add(centerPanel);
-        buttonsOperations();
+
         eventsPanel.refreshEvents();
 
         this.addWindowListener(windowCloser);
@@ -139,25 +144,7 @@ public class CalendarFrame extends JFrame implements ActionListener {
         }catch (IOException e){e.printStackTrace();}
     }
 
-    /**
-     * Pobiera z paneli przyciski i dodająca do nich ActionListenery
-     */
-    private void buttonsOperations(){
-        calendarButton = menuPanel.calendarButton;
-        eventListButton = menuPanel.eventListButton;
-        changeUserButton = menuPanel.changeUserButton;
-        calendarButton.addActionListener(this);
-        eventListButton.addActionListener(this);
-        changeUserButton.addActionListener(this);
 
-        dayButtons= monthPanel.dayButtons;
-        for(int i =0; i<31;i++){
-            if(dayButtons[i] == null) {
-                break;
-            }
-            dayButtons[i].addActionListener(this);
-        }
-    }
 
     /**
      * Zapisuje nick użytkownika do pliku by nie musiał się kolejny raz logować
@@ -217,32 +204,7 @@ public class CalendarFrame extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        Object source = e.getSource();
-        if(source == calendarButton){
-            centerPanel.remove(eventsPanel);
-            centerPanel.add(monthPanel);
-            refreshPanel();
-        }
-        else if(source == eventListButton) {
-            centerPanel.remove(monthPanel);
-            centerPanel.add(eventsPanel);
-            refreshPanel();
-        }
-        else if(source == changeUserButton){
-            File file = new File("localfiles/userDetails.dat");
-            file.delete();
-            dispose();
-        }
-        else{
-            for(int i=0;i<31;i++){
-                if(source==dayButtons[i]){
-                    actualSelectedDay=i;
-                    NewEventFrame newEventFrame = new NewEventFrame(this);
-                    newEventFrame.setVisible(true);
-                    break;
-                }
-            }
-        }
+        buttonsOperations.checkClickedButton(e.getSource());
     }
 
     /**
@@ -276,8 +238,7 @@ public class CalendarFrame extends JFrame implements ActionListener {
         centerPanel.remove(monthPanel);
         monthPanel = newMonthPanel;
         centerPanel.add(monthPanel);
-        buttonsOperations();
-        refreshPanel();
+        buttonsOperations.refreshButtonsOperations();
     }
 
     /**
