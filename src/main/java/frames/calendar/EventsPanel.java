@@ -22,10 +22,9 @@ public class EventsPanel extends JPanel{
 
     /**
      * Konstruktor służący do inicjalizacji komponentów, koniecznych zmiennych i kontenerów
-     * @param calendarFrame Główne okno programu
      */
-    public EventsPanel(CalendarFrame calendarFrame) {
-        this.calendarFrame = calendarFrame;
+    public EventsPanel() {
+        calendarFrame = CalendarFrame.getInstance();
         userEvents = new ArrayList<>();
         defaultEvents = new ArrayList<>();
         //importEvents();

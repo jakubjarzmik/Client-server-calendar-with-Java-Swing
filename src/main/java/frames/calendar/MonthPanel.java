@@ -24,12 +24,11 @@ class MonthPanel extends JPanel {
 
     /**
      * Konstruktor służący do inicjalizacji komponentów, koniecznych zmiennych i kontenerów
-     * @param calendarFrame Główne okno programu
      * @param month Miesiąc który ma być wyświetlony
      * @param year Rok który ma być wyświetlony
      */
-    public MonthPanel(CalendarFrame calendarFrame,int month, int year) {
-        this.calendarFrame = calendarFrame;
+    public MonthPanel(int month, int year) {
+        calendarFrame = CalendarFrame.getInstance();
         dayButtons = new JButton[31];
         this.month = month;
         this.year = year;

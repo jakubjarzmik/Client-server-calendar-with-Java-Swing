@@ -24,11 +24,10 @@ class NewEventFramePanel extends JPanel {
 
     /**
      * Konstruktor ustawiający komponenty panelu
-     * @param calendarFrame główne okno programu
      * @param newEventFrame okno dodawania nowego wydarzenia
      */
-    public NewEventFramePanel(CalendarFrame calendarFrame, NewEventFrame newEventFrame) {
-        this.calendarFrame = calendarFrame;
+    public NewEventFramePanel(NewEventFrame newEventFrame) {
+        this.calendarFrame = CalendarFrame.getInstance();
         this.newEventFrame = newEventFrame;
         setDatesArrays();
         this.add(createGUI());

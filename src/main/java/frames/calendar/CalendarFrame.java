@@ -53,8 +53,8 @@ public class CalendarFrame extends JFrame implements ActionListener {
         actualSelectedMonth = LocalDate.now().getMonthValue()-1;
         actualSelectedYear = LocalDate.now().getYear();
         actualSelectedDay = -1;
-        monthPanel = new MonthPanel(this,actualSelectedMonth, actualSelectedYear);
-        eventsPanel = new EventsPanel(this);
+        monthPanel = new MonthPanel(actualSelectedMonth, actualSelectedYear);
+        eventsPanel = new EventsPanel();
         menuPanel = new MenuPanel();
         centerPanel = new JPanel(new BorderLayout());
         buttonsOperations = new ButtonsOperations();
@@ -77,16 +77,15 @@ public class CalendarFrame extends JFrame implements ActionListener {
     public static CalendarFrame getInstance(){
         if(instance == null) {
             instance = new CalendarFrame();
+            System.out.println("nullem jest");
         }
+        System.out.println("asda");
         return instance;
     }
 
     /**
      * Służy do uruchomienia aplikacji
      */
-    public static void main(String[] args) {
-        CalendarFrame.getInstance();
-    }
 
     public EventsPanel getEventsPanel() {
         return eventsPanel;
@@ -234,7 +233,7 @@ public class CalendarFrame extends JFrame implements ActionListener {
      * Obsługuje zmiane paneli miesięcy
      */
     private void setMonth(){
-        MonthPanel newMonthPanel = new MonthPanel(this,actualSelectedMonth, actualSelectedYear);
+        MonthPanel newMonthPanel = new MonthPanel(actualSelectedMonth, actualSelectedYear);
         centerPanel.remove(monthPanel);
         monthPanel = newMonthPanel;
         centerPanel.add(monthPanel);

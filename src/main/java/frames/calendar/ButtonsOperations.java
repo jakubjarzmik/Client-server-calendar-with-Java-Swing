@@ -1,5 +1,7 @@
-﻿package frames.calendar;
+package frames.calendar;
+
 import frames.newevent.NewEventFrame;
+
 import javax.swing.*;
 import java.io.File;
 class ButtonsOperations {
@@ -53,7 +55,7 @@ class ButtonsOperations {
             for(int i=0;i<31;i++){
                 if(source==dayButtons[i]){
                     calendarFrame.actualSelectedDay=i;
-                    NewEventFrame newEventFrame = new NewEventFrame(calendarFrame);
+                    NewEventFrame newEventFrame = new NewEventFrame();
                     newEventFrame.setVisible(true);
                     break;
                 }

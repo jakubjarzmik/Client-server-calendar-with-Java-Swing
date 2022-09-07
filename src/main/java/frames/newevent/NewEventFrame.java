@@ -27,10 +27,9 @@ public class NewEventFrame extends JDialog implements ActionListener {
 
     /**
      * Konstruktor uruchamiający metodę inicjalizacji okna
-     * @param calendarFrame główne okno programu
      */
-    public NewEventFrame(CalendarFrame calendarFrame) {
-        this.calendarFrame = calendarFrame;
+    public NewEventFrame() {
+        calendarFrame = CalendarFrame.getInstance();
         init();
     }
 
@@ -64,7 +63,7 @@ public class NewEventFrame extends JDialog implements ActionListener {
      * Pobiera z paneli przyciski i dodająca do nich ActionListenery
      */
     private void initializeComponents(){
-        newEventFramePanel = new NewEventFramePanel(calendarFrame, this);
+        newEventFramePanel = new NewEventFramePanel(this);
 
         temporaryEventCheckBox = newEventFramePanel.temporaryEventCheckBox;
         allDayEventCheckBox = newEventFramePanel.allDayEventCheckBox;
