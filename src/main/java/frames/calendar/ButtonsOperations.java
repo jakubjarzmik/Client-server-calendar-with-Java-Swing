@@ -4,6 +4,8 @@ import frames.newevent.NewEventFrame;
 
 import javax.swing.*;
 import java.io.File;
+import java.util.Arrays;
+
 class ButtonsOperations {
     private final CalendarFrame calendarFrame;
     private final JButton calendarButton, eventListButton, changeUserButton;
@@ -37,29 +39,36 @@ class ButtonsOperations {
 
     protected void checkClickedButton(Object source){
         if(source == calendarButton){
-            calendarFrame.centerPanel.remove(calendarFrame.eventsPanel);
-            calendarFrame.centerPanel.add(calendarFrame.monthPanel);
-            calendarFrame.refreshPanel();
+            changePanel(calendarFrame.eventsPanel,calendarFrame.monthPanel);
         }
         else if(source == eventListButton) {
-            calendarFrame.centerPanel.remove(calendarFrame.monthPanel);
-            calendarFrame.centerPanel.add(calendarFrame.eventsPanel);
-            calendarFrame.refreshPanel();
+            changePanel(calendarFrame.monthPanel, calendarFrame.eventsPanel);
         }
         else if(source == changeUserButton){
-            File file = new File("localfiles/userDetails.dat");
-            file.delete();
-            calendarFrame.dispose();
+            deleteUserDetailsFile();
         }
         else{
             for(int i=0;i<31;i++){
                 if(source==dayButtons[i]){
-                    calendarFrame.actualSelectedDay=i;
-                    NewEventFrame newEventFrame = new NewEventFrame();
-                    newEventFrame.setVisible(true);
+                    openNewEventFrameWindow(i);
                     break;
                 }
             }
         }
+    }
+    private void changePanel(JPanel panelToRemove, JPanel panelToSet){
+        calendarFrame.centerPanel.remove(panelToRemove);
+        calendarFrame.centerPanel.add(panelToSet);
+        calendarFrame.refreshPanel();
+    }
+    private void deleteUserDetailsFile(){
+        File file = new File("localfiles/userDetails.dat");
+        file.delete();
+        calendarFrame.dispose();
+    }
+    private void openNewEventFrameWindow(int selectedDay){
+        calendarFrame.actualSelectedDay=selectedDay;
+        NewEventFrame newEventFrame = new NewEventFrame();
+        newEventFrame.setVisible(true);
     }
 }

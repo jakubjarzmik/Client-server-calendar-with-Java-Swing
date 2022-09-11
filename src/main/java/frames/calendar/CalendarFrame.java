@@ -41,23 +41,18 @@ public class CalendarFrame extends JFrame implements ActionListener {
     private ObjectInputStream in;
     private String nick;
     private boolean changeNickname;
-    private final ButtonsOperations buttonsOperations;
+    private ButtonsOperations buttonsOperations;
 
 
     /**
      * Konstruktor inicjalizuje komponenty, łączy się z serwerem i wyświetla okno logowania
      */
-    private CalendarFrame() {
+    protected CalendarFrame() {
         super("Kalendarz"); // tytuł okienka
         unusualHolidayAndNameDay = new String[2];
         actualSelectedMonth = LocalDate.now().getMonthValue()-1;
         actualSelectedYear = LocalDate.now().getYear();
         actualSelectedDay = -1;
-        monthPanel = new MonthPanel(actualSelectedMonth, actualSelectedYear);
-        eventsPanel = new EventsPanel();
-        menuPanel = new MenuPanel();
-        centerPanel = new JPanel(new BorderLayout());
-        buttonsOperations = new ButtonsOperations();
         try{
             Socket socket = new Socket("127.0.0.1", 2020);
             out = new ObjectOutputStream(
@@ -68,18 +63,11 @@ public class CalendarFrame extends JFrame implements ActionListener {
             System.exit(0);
         }
         nick = "";
-        changeNickname = false;
-        readNick();
-        showLoginWindow();
-        upperPanel = new UpperPanel();
-        init();
     }
     public static CalendarFrame getInstance(){
         if(instance == null) {
             instance = new CalendarFrame();
-            System.out.println("nullem jest");
         }
-        System.out.println("asda");
         return instance;
     }
 
@@ -111,6 +99,15 @@ public class CalendarFrame extends JFrame implements ActionListener {
      * Służy do wyświetlenia okna aplikacji z wszystkimi komponentami
      */
     public void init() {
+
+        monthPanel = new MonthPanel(actualSelectedMonth, actualSelectedYear);
+        eventsPanel = new EventsPanel();
+        menuPanel = new MenuPanel();
+        centerPanel = new JPanel(new BorderLayout());
+        buttonsOperations = new ButtonsOperations();
+        readNick();
+        showLoginWindow();
+        upperPanel = new UpperPanel();
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
