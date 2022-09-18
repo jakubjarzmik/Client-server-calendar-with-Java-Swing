@@ -19,7 +19,6 @@ import javax.swing.*;
  * @version 0.1
  */
 public class CalendarFrame extends JFrame implements ActionListener {
-    private static CalendarFrame instance;
     public static final Color NAVY_BLUE = new Color(0,23,48);
     public static final Color LIGHT_BLUE = new Color(74,215,209);
     public static final Color LIGHT_RED = new Color(254,74,73);
@@ -30,18 +29,19 @@ public class CalendarFrame extends JFrame implements ActionListener {
     public static final Font HEADER_DEFAULT_FONT = new Font("Open Sans", Font.BOLD, 16);
     public static final String[] MONTH_NAMES = { "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"};
     public static String[] unusualHolidayAndNameDay;
-    private final WindowCloser windowCloser = new WindowCloser();
     protected MonthPanel monthPanel;
     protected EventsPanel eventsPanel;
     protected UpperPanel upperPanel;
     protected MenuPanel menuPanel;
     protected JPanel centerPanel;
     protected int actualSelectedDay, actualSelectedMonth, actualSelectedYear;
-    private ObjectOutputStream out;
-    private ObjectInputStream in;
-    private String nick;
-    private boolean changeNickname;
+    protected String nick;
+    private final WindowCloser windowCloser = new WindowCloser();
+    private static CalendarFrame instance;
+    protected ObjectOutputStream out;
+    protected ObjectInputStream in;
     private ButtonsOperations buttonsOperations;
+    private UserServices userServices;
 
 
     /**
@@ -105,8 +105,7 @@ public class CalendarFrame extends JFrame implements ActionListener {
         menuPanel = new MenuPanel();
         centerPanel = new JPanel(new BorderLayout());
         buttonsOperations = new ButtonsOperations();
-        readNick();
-        showLoginWindow();
+        userServices = new UserServices();
         upperPanel = new UpperPanel();
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
@@ -142,57 +141,12 @@ public class CalendarFrame extends JFrame implements ActionListener {
 
 
 
-    /**
-     * Zapisuje nick użytkownika do pliku by nie musiał się kolejny raz logować
-     */
-    private void saveNick(){
-        try (DataOutputStream out = new DataOutputStream(new FileOutputStream("localfiles/userDetails.dat"))) {
-            out.writeUTF(nick);
-        } catch(IOException e) { e.printStackTrace(); }
-    }
 
-    /**
-     * Wyświetla okienko logowania
-     */
-    private void showLoginWindow(){
-        if(nick.isBlank() || changeNickname) {
-            nick = JOptionPane.showInputDialog("Podaj swój nickname:");
-            String[] options = new String[]{"TAK","NIE"};
-            int result = JOptionPane.showOptionDialog(this,"Zapamiętać nazwę użytkownika?","",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,
-                    null,options,null);
-            if(result == 0)
-                saveNick();
-        }
-        changeNickname = false;
-        showEvents();
-    }
 
-    /**
-     * Wczystuje nick użytkownika z pliku jeśli był zapisany
-     */
-    private void readNick(){
-        try (DataInputStream in = new DataInputStream(new FileInputStream("localfiles/userDetails.dat"))) {
-            nick = in.readUTF();
-        }
-        catch (FileNotFoundException ex) { System.out.println("Brak pliku z nickiem użytkownika"); }
-        catch(IOException e) { e.printStackTrace(); }
-    }
 
-    /**
-     * Pobiera wydarzenia z serwera
-     */
-    private void showEvents(){
-        try {
-            out.writeObject(nick);
 
-            UnusualHolidayAndNameDay u = (UnusualHolidayAndNameDay) in.readObject();
-            unusualHolidayAndNameDay[0] = u.getHolidayName();
-            unusualHolidayAndNameDay[1] = u.getNameDay();
 
-            eventsPanel.userEvents =(ArrayList<Event>) in.readObject();
-            eventsPanel.defaultEvents =(ArrayList<AllDayEvent>) in.readObject();
-        }catch (Exception e){e.printStackTrace();}
-    }
+
 
     /**
      * Obsługuje przyciski w aplikacji
