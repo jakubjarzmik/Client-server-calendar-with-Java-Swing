@@ -139,15 +139,6 @@ public class CalendarFrame extends JFrame implements ActionListener {
         }catch (IOException e){e.printStackTrace();}
     }
 
-
-
-
-
-
-
-
-
-
     /**
      * Obsługuje przyciski w aplikacji
      * @param e <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/event/ActionEvent.html">ActionEvent</a>
