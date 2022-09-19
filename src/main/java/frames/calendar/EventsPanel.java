@@ -27,7 +27,6 @@ public class EventsPanel extends JPanel{
         calendarFrame = CalendarFrame.getInstance();
         userEvents = new ArrayList<>();
         defaultEvents = new ArrayList<>();
-        //importEvents();
         setBackground(Color.WHITE);
         guiPanel = createGUI();
         this.add(guiPanel);
@@ -126,7 +125,6 @@ public class EventsPanel extends JPanel{
 
             eventPanel.add(eventNamePanel,BorderLayout.NORTH);
 
-            if(!e.getDescription().isBlank()){ }
             if(checkAddingDescriptionPanel) {
                 eventPanel.add(descriptionPanel,BorderLayout.CENTER);
             }

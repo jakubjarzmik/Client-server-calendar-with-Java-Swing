@@ -2,10 +2,10 @@ package server;
 
 import storageclasses.Event;
 import storageclasses.UnusualHolidayAndNameDay;
+import adapters.ExternalWebsitesAdapter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-
 import java.io.*;
 import java.net.Socket;
 import java.time.LocalDate;
@@ -43,17 +43,14 @@ class Session extends Thread {
             nick =(String) in.readObject();
             System.out.println("Nick: " + nick);
 
+            ExternalWebsitesAdapter adapter = new ExternalWebsitesAdapter();
             String holidayName, nameDay;
             try {
-                Document unusualHolidayDocument = Jsoup.connect("https://bimkal.pl/kalendarz-swiat").get();
-                Elements unusualHolidayElements = unusualHolidayDocument.getElementsByClass("nietypowe");
-                holidayName = unusualHolidayElements.get(0).text().split(",")[0];
+                holidayName = adapter.getTodayHolidayName();
             }catch (IOException exception){ holidayName = "* błąd połączenia *";}
 
             try {
-                Document nameDayDocument = Jsoup.connect("https://imienniczek.pl/dzis").get();
-                Elements nameDayElements = nameDayDocument.getElementsByClass("main_imi");
-                nameDay = nameDayElements.get(0).text().replace(" ", ", ");
+                nameDay = adapter.getTodayNameDay();
             }catch (IOException exception){nameDay = "* błąd połączenia *";}
 
 
