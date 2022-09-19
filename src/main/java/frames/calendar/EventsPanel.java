@@ -203,7 +203,7 @@ public class EventsPanel extends JPanel{
         this.add(guiPanel);
         calendarFrame.centerPanel.remove(calendarFrame.monthPanel);
         calendarFrame.centerPanel.add(calendarFrame.eventsPanel);
-        calendarFrame.refreshPanel();
+        calendarFrame.buttonsOperations.refreshPanel();
     }
 
 }

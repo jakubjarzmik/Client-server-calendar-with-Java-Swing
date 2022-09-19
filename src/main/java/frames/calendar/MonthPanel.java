@@ -64,7 +64,7 @@ class MonthPanel extends JPanel {
         Action nextMonthAction = new AbstractAction("") {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    calendarFrame.setNextMonth();
+                    calendarFrame.buttonsOperations.setNextMonth();
                 }
             };
             nextMonthAction.putValue(Action.ACCELERATOR_KEY,KeyStroke.getKeyStroke("RIGHT"));
@@ -76,7 +76,7 @@ class MonthPanel extends JPanel {
             Action previousMonthAction = new AbstractAction("") {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    calendarFrame.setPreviousMonth();
+                    calendarFrame.buttonsOperations.setPreviousMonth();
                 }
             };
             previousMonthAction.putValue(Action.ACCELERATOR_KEY,KeyStroke.getKeyStroke("LEFT"));

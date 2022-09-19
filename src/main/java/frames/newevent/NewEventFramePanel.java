@@ -1,5 +1,6 @@
 package frames.newevent;
 
+import frames.calendar.ButtonsOperations;
 import frames.calendar.CalendarFrame;
 
 import javax.swing.*;
@@ -12,7 +13,7 @@ import java.time.Month;
  * @author Jakub Jarzmik
  */
 class NewEventFramePanel extends JPanel {
-    private final CalendarFrame calendarFrame;
+    private final ButtonsOperations buttonsOperations;
     private final NewEventFrame newEventFrame;
     protected JCheckBox temporaryEventCheckBox, allDayEventCheckBox;
     protected JTextField name;
@@ -27,7 +28,7 @@ class NewEventFramePanel extends JPanel {
      * @param newEventFrame okno dodawania nowego wydarzenia
      */
     public NewEventFramePanel(NewEventFrame newEventFrame) {
-        this.calendarFrame = CalendarFrame.getInstance();
+        this.buttonsOperations = ButtonsOperations.getInstance();
         this.newEventFrame = newEventFrame;
         setDatesArrays();
         this.add(createGUI());
@@ -105,9 +106,9 @@ class NewEventFramePanel extends JPanel {
         setLabel(startTimeLabel);
         startTimePanel.add(startTimeLabel);
         dayStartTime = new JComboBox<>(days);
-        dayStartTime.setSelectedItem(days[calendarFrame.getActualSelectedDay()]);
+        dayStartTime.setSelectedItem(days[buttonsOperations.getActualSelectedDay()]);
         monthStartTime = new JComboBox<>(CalendarFrame.MONTH_NAMES);
-        monthStartTime.setSelectedItem(CalendarFrame.MONTH_NAMES[calendarFrame.getActualSelectedMonth()]);
+        monthStartTime.setSelectedItem(CalendarFrame.MONTH_NAMES[buttonsOperations.getActualSelectedMonth()]);
         yearStartTime = new JComboBox<>(years);
         hourStartTime = new JComboBox<>(hours);
         minuteStartTime = new JComboBox<>(minutes);
@@ -136,9 +137,9 @@ class NewEventFramePanel extends JPanel {
         setLabel(endTimeLabel);
         endTimePanel.add(endTimeLabel);
         dayEndTime = new JComboBox<>(days);
-        dayEndTime.setSelectedItem(days[calendarFrame.getActualSelectedDay()]);
+        dayEndTime.setSelectedItem(days[buttonsOperations.getActualSelectedDay()]);
         monthEndTime = new JComboBox<>(CalendarFrame.MONTH_NAMES);
-        monthEndTime.setSelectedItem(CalendarFrame.MONTH_NAMES[calendarFrame.getActualSelectedMonth()]);
+        monthEndTime.setSelectedItem(CalendarFrame.MONTH_NAMES[buttonsOperations.getActualSelectedMonth()]);
         yearEndTime = new JComboBox<>(years);
         hourEndTime = new JComboBox<>(hours);
         minuteEndTime = new JComboBox<>(minutes);
@@ -206,7 +207,7 @@ class NewEventFramePanel extends JPanel {
      * Ustawia wartości w tablicach potrzebnych w polach wyboru
      */
     private void setDatesArrays(){
-        int year = calendarFrame.getActualSelectedYear();
+        int year = buttonsOperations.getActualSelectedYear();
         years = new Integer[10];
         for(int i=0;i<10;i++)
             years[i] = year+i;
@@ -226,10 +227,10 @@ class NewEventFramePanel extends JPanel {
      * Służy do ustawienia ilości dni w danym miesiącu
      */
     private void setDays(){
-        Month month = Month.of(calendarFrame.getActualSelectedMonth()+1);
+        Month month = Month.of(buttonsOperations.getActualSelectedMonth()+1);
         int daysInMonth = month.length(true);
         if(month==Month.FEBRUARY)
-            if(calendarFrame.getActualSelectedYear()%4!=0)
+            if(buttonsOperations.getActualSelectedYear()%4!=0)
                 daysInMonth--;
         Integer[] days = new Integer[daysInMonth];
         for(int i=0;i<days.length;i++)

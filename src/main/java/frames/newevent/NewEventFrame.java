@@ -1,5 +1,6 @@
 package frames.newevent;
 
+import frames.calendar.ButtonsOperations;
 import frames.calendar.CalendarFrame;
 import storageclasses.AllDayEvent;
 import storageclasses.TemporaryEvent;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
  */
 public class NewEventFrame extends JDialog implements ActionListener {
     private final CalendarFrame calendarFrame;
+    private final ButtonsOperations buttonsOperations;
     private NewEventFramePanel newEventFramePanel;
     private JCheckBox temporaryEventCheckBox, allDayEventCheckBox;
     //private JTextField name;
@@ -30,6 +32,7 @@ public class NewEventFrame extends JDialog implements ActionListener {
      */
     public NewEventFrame() {
         calendarFrame = CalendarFrame.getInstance();
+        buttonsOperations = ButtonsOperations.getInstance();
         init();
     }
 
@@ -102,15 +105,15 @@ public class NewEventFrame extends JDialog implements ActionListener {
                 calendarFrame.getCenterPanel().remove(calendarFrame.getEventsPanel());
                 if (temporaryEventCheckBox.isSelected()) {
                     TemporaryEvent temporaryEvent = new TemporaryEvent(newEventFramePanel.name.getText(), newEventFramePanel.description.getText(),
-                            LocalDateTime.of(newEventFramePanel.yearStartTime.getSelectedIndex() + calendarFrame.getActualSelectedYear(), newEventFramePanel.monthStartTime.getSelectedIndex() + 1,
+                            LocalDateTime.of(newEventFramePanel.yearStartTime.getSelectedIndex() + buttonsOperations.getActualSelectedYear(), newEventFramePanel.monthStartTime.getSelectedIndex() + 1,
                                     newEventFramePanel.dayStartTime.getSelectedIndex() + 1, newEventFramePanel.hourStartTime.getSelectedIndex(),
                                     newEventFramePanel.minuteStartTime.getSelectedIndex()),
-                            LocalDateTime.of(newEventFramePanel.yearEndTime.getSelectedIndex() + calendarFrame.getActualSelectedYear(), newEventFramePanel.monthEndTime.getSelectedIndex() + 1,
+                            LocalDateTime.of(newEventFramePanel.yearEndTime.getSelectedIndex() + buttonsOperations.getActualSelectedYear(), newEventFramePanel.monthEndTime.getSelectedIndex() + 1,
                                     newEventFramePanel.dayEndTime.getSelectedIndex() + 1, newEventFramePanel.hourEndTime.getSelectedIndex(),
                                     newEventFramePanel.minuteEndTime.getSelectedIndex()));
                     calendarFrame.getEventsPanel().addEvent(temporaryEvent);
                 } else if (allDayEventCheckBox.isSelected()) {
-                    AllDayEvent allDayEvent = new AllDayEvent(newEventFramePanel.name.getText(), newEventFramePanel.description.getText(), LocalDate.of(newEventFramePanel.yearStartTime.getSelectedIndex() + calendarFrame.getActualSelectedYear(), newEventFramePanel.monthStartTime.getSelectedIndex() + 1,
+                    AllDayEvent allDayEvent = new AllDayEvent(newEventFramePanel.name.getText(), newEventFramePanel.description.getText(), LocalDate.of(newEventFramePanel.yearStartTime.getSelectedIndex() + buttonsOperations.getActualSelectedYear(), newEventFramePanel.monthStartTime.getSelectedIndex() + 1,
                             newEventFramePanel.dayStartTime.getSelectedIndex() + 1));
                     calendarFrame.getEventsPanel().addEvent(allDayEvent);
                 }

@@ -19,6 +19,7 @@ import javax.swing.*;
  * @version 0.1
  */
 public class CalendarFrame extends JFrame implements ActionListener {
+    private static CalendarFrame instance;
     public static final Color NAVY_BLUE = new Color(0,23,48);
     public static final Color LIGHT_BLUE = new Color(74,215,209);
     public static final Color LIGHT_RED = new Color(254,74,73);
@@ -34,13 +35,12 @@ public class CalendarFrame extends JFrame implements ActionListener {
     protected UpperPanel upperPanel;
     protected MenuPanel menuPanel;
     protected JPanel centerPanel;
-    protected int actualSelectedDay, actualSelectedMonth, actualSelectedYear;
+
     protected String nick;
     private final WindowCloser windowCloser = new WindowCloser();
-    private static CalendarFrame instance;
     protected ObjectOutputStream out;
     protected ObjectInputStream in;
-    private ButtonsOperations buttonsOperations;
+    protected ButtonsOperations buttonsOperations;
     private UserServices userServices;
 
 
@@ -50,9 +50,6 @@ public class CalendarFrame extends JFrame implements ActionListener {
     protected CalendarFrame() {
         super("Kalendarz"); // tytuł okienka
         unusualHolidayAndNameDay = new String[2];
-        actualSelectedMonth = LocalDate.now().getMonthValue()-1;
-        actualSelectedYear = LocalDate.now().getYear();
-        actualSelectedDay = -1;
         try{
             Socket socket = new Socket("127.0.0.1", 2020);
             out = new ObjectOutputStream(
@@ -83,30 +80,22 @@ public class CalendarFrame extends JFrame implements ActionListener {
         return centerPanel;
     }
 
-    public int getActualSelectedDay() {
-        return actualSelectedDay;
-    }
-
-    public int getActualSelectedMonth() {
-        return actualSelectedMonth;
-    }
-
-    public int getActualSelectedYear() {
-        return actualSelectedYear;
-    }
 
     /**
      * Służy do wyświetlenia okna aplikacji z wszystkimi komponentami
      */
     public void init() {
-
-        monthPanel = new MonthPanel(actualSelectedMonth, actualSelectedYear);
-        eventsPanel = new EventsPanel();
         menuPanel = new MenuPanel();
+        monthPanel = new MonthPanel(ButtonsOperations.getActualSelectedMonth(), (ButtonsOperations.getActualSelectedYear()));
+        eventsPanel = new EventsPanel();
         centerPanel = new JPanel(new BorderLayout());
-        buttonsOperations = new ButtonsOperations();
+
+
+        buttonsOperations = ButtonsOperations.getInstance();
         userServices = new UserServices();
+
         upperPanel = new UpperPanel();
+
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -146,52 +135,6 @@ public class CalendarFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         buttonsOperations.checkClickedButton(e.getSource());
-    }
-
-    /**
-     * Zmienia miesiąc na poprzedni
-     */
-    protected void setPreviousMonth(){
-        actualSelectedMonth--;
-        if(actualSelectedMonth<0){
-            actualSelectedYear--;
-            actualSelectedMonth = 11;
-        }
-        setMonth();
-    }
-    /**
-     * Zmienia miesiąc na następny
-     */
-    protected void setNextMonth(){
-        actualSelectedMonth++;
-        if(actualSelectedMonth>11){
-            actualSelectedYear++;
-            actualSelectedMonth = 0;
-        }
-        setMonth();
-    }
-
-    /**
-     * Obsługuje zmiane paneli miesięcy
-     */
-    private void setMonth(){
-        MonthPanel newMonthPanel = new MonthPanel(actualSelectedMonth, actualSelectedYear);
-        centerPanel.remove(monthPanel);
-        monthPanel = newMonthPanel;
-        centerPanel.add(monthPanel);
-        buttonsOperations.refreshButtonsOperations();
-    }
-
-    /**
-     * Odświeża widok okna
-     */
-    protected void refreshPanel(){
-        JPanel newViewPanel = new JPanel(new BorderLayout());
-        newViewPanel.add(menuPanel,BorderLayout.WEST);
-        newViewPanel.add(centerPanel);
-        setContentPane(newViewPanel);
-        revalidate();
-        pack();
     }
 
     /**
