@@ -1,5 +1,5 @@
 # Client-server-calendar-with-Java-Swing
-A calendar project created for a course credit on my studies. The project includes JavaDoc documentation.
+A project of a desktop calendar application written in JAVA using Swing. The application is written in a client-server architecture. It has the ability to add events and display them in chronological order.
 
 When running the program, it checks if the server is running and depending on whether or not the user's name has been saved, the login window or the main program window will be displayed. During the login, we enter any string of characters and depending on whether or not that has already been entered, events for that user will be retrieved or a new user with the entered name will be created.
 
